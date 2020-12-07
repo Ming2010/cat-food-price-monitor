@@ -1,3 +1,4 @@
+import time
 import requests
 from bs4 import BeautifulSoup
 
@@ -13,6 +14,7 @@ def set_url(n):
     for i in range(n):
         current_url = url + str(25*i)
         urls.append(current_url)
+        time.sleep(2)
     return urls
 
 def get_response(urls):
@@ -49,7 +51,7 @@ def get_records(responses):
     return records
 
 if __name__ == '__main__':
-    urls = set_url(1)
+    urls = set_url(10)
     responses = get_response(urls)
     records = get_records(responses)
 
