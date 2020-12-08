@@ -1,5 +1,6 @@
 import requests
 from bs4 import BeautifulSoup
+from tqdm import tqdm
 
 # 设置filter
 filter_in = '车'
@@ -10,7 +11,7 @@ def set_url(n):
     """设置需要爬取的页面数量"""
     url = 'https://www.douban.com/group/656297/discussion?start='
     urls = []
-    for i in range(n):
+    for i in tqdm(range(n), ascii=True, desc='Processing '):
         current_url = url + str(25*i)
         urls.append(current_url)
     return urls
