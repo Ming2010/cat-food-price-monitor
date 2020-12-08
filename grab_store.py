@@ -18,10 +18,8 @@ def set_url(n):
 def get_response(urls):
     """获得页面内容"""
     responses = []
-    # 设置请求头
-    headers = {'User-Agent':'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_14_6) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/86.0.4240.183 Safari/537.36'}
     for url in urls:
-        response = requests.get(url=url, headers=headers)
+        response = requests.get(url=url, headers={'User-Agent': "Resistance is futile"}).  # we don't have to give the exact header
         responses.append(response)
     return responses
 
