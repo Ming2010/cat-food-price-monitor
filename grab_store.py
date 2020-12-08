@@ -20,7 +20,7 @@ def get_response(urls):
     """获得页面内容"""
     responses = []
     for url in urls:
-        response = requests.get(url=url, headers={'User-Agent': "Resistance is futile"}).  # we don't have to give the exact header
+        response = requests.get(url=url, headers={'User-Agent': "Resistance is futile"})  # we don't have to give the exact header
         responses.append(response)
     return responses
 
