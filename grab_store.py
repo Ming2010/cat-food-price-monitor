@@ -1,3 +1,4 @@
+import time
 import requests
 from bs4 import BeautifulSoup
 from tqdm import tqdm
@@ -11,15 +12,16 @@ def set_url(n):
     """设置需要爬取的页面数量"""
     url = 'https://www.douban.com/group/656297/discussion?start='
     urls = []
-    for i in tqdm(range(n), ascii=True, desc='Processing '):
+    for i in tqdm(range(n), ascii=True, desc='Get links '):
         current_url = url + str(25*i)
         urls.append(current_url)
+        time.sleep(2)
     return urls
 
 def get_response(urls):
     """获得页面内容"""
     responses = []
-    for url in urls:
+    for url in tqdm(urls, ascii=True, desc='Collecting '):
         response = requests.get(url=url, headers={'User-Agent': "Resistance is futile"})  # we don't have to give the exact header
         responses.append(response)
     return responses
@@ -28,7 +30,7 @@ def get_records(responses):
     """解析页面内容，并对记录进行初步筛选"""
     records = []
     # get records from each page
-    for response in responses:
+    for response in tqdm(responses, ascii=True, desc='Parsing '):
         soup = BeautifulSoup(response.text, "html.parser")
 
         # 获取帖子列表，将帖子链接和帖子名存储到列表中
@@ -48,7 +50,7 @@ def get_records(responses):
     return records
 
 if __name__ == '__main__':
-    urls = set_url(1)
+    urls = set_url(10)
     responses = get_response(urls)
     records = get_records(responses)
 
